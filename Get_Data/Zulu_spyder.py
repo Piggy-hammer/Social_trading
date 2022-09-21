@@ -10,7 +10,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from time import sleep
-import pandas as pd
 
 # 登录用的账户名和密码
 username = 'mouyangchen@163.com'
@@ -86,7 +85,7 @@ def getTheFullList(browser, df):
         href = web_link.get_attribute('href')
         df.loc[name] = [name,href]
     print(df)
-    df.to_csv('D:/Social/ZuluInvestors.csv', encoding='UTF-8')
+    df.to_csv('D:/Social_trading/Zulu/ZuluInvestors_original.csv', encoding='UTF-8')
 
 
 if __name__ == '__main__':
@@ -95,6 +94,7 @@ if __name__ == '__main__':
 
     # 设置selenium使用chrome的无头模式
     options = Options()
+
     # options.add_argument('--headless')
     options.add_argument("--window-size=1920,1080")
     # 在启动浏览器时加入配置
