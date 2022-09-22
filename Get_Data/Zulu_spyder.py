@@ -14,6 +14,9 @@ from time import sleep
 # 登录用的账户名和密码
 username = 'mouyangchen@163.com'
 key = 'X9aj:7.tCCGWG7u'
+# 该方法中可调试参数
+amount_need = 100
+csv_out = 'D:/Social_trading/Zulu/ZuluInvestors_original_0922.csv'
 
 
 # 此方法用于登录
@@ -64,7 +67,6 @@ def getTheFullList(browser, df):
     ActionChains(browser).move_to_element(close_cookie).click(on_element=None).perform()
 
     # 计算需要点击添加按钮的次数
-    amount_need = 500
     press = int((amount_need - 50) / 50)
 
     # 点击press次添加按钮,每按一次增加50个
@@ -83,13 +85,13 @@ def getTheFullList(browser, df):
         web_link = e.find_element_by_xpath('./tr[1]/td[2]/zl-username/a')
         name = web_link.get_attribute("title")
         href = web_link.get_attribute('href')
-        df.loc[name] = [name,href]
+        df.loc[name] = [href]
     print(df)
-    df.to_csv('D:/Social_trading/Zulu/ZuluInvestors_original.csv', encoding='UTF-8')
+    df.to_csv(csv_out, encoding='UTF-8')
 
 
 if __name__ == '__main__':
-    df = pandas.DataFrame(columns=['name', 'website']).set_index('name',drop=None)
+    df = pandas.DataFrame(columns=['name', 'website']).set_index('name')
     print(df.columns)
 
     # 设置selenium使用chrome的无头模式
